@@ -2,12 +2,24 @@
 
 
 html.dark {
-	background: #100c2a !important;
+	background: #171717	 !important;
 }
+
+html {
+	background: #f3f3f3 !important;
+}
+
+html::-webkit-scrollbar,body::-webkit-scrollbar{
+	width:0px;
+	height:0px;
+}
+
+
 
 .prose {
 	scroll-behavior: smooth;
 }
+
 
 #nprogress {
 	pointer-events: none;
