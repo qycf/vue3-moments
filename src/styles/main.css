@@ -9,10 +9,10 @@ html {
 	background: #f3f3f3 !important;
 }
 
-html::-webkit-scrollbar,body::-webkit-scrollbar{
+/* html::-webkit-scrollbar,body::-webkit-scrollbar{
 	width:0px;
 	height:0px;
-}
+} */
 
 
 

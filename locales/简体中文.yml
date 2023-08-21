@@ -1,15 +1,25 @@
 # 中文
 
+#index
 follow: 关注
 PM: 私信
 share: 分享
 translate: 翻译
 copyLink: 复制链接
 pined: 置顶
-
 scenery: 风光
 portrait: 人像
 humanity: 人文
+
+uninterested: 不感兴趣
+block the author: 屏蔽作者
+shit: 垃圾内容
+
+
+#SiderBar
+Profile: 成份
+Galleries: 画廊
+Navigation: 导航
 
 
 dashboard: 仪表盘
