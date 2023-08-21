@@ -4,6 +4,11 @@ export const http = axios.create({
 	baseURL: import.meta.env.VITE_API_BASE_URL,
 })
 
+export interface axiosResponse<T> {
+	data: T
+	code: number
+}
+
 // 添加请求拦截器
 http.interceptors.request.use(
 	function (config) {

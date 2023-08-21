@@ -42,7 +42,7 @@
 					</div>
 				</div>
 				<!-- 弹出选项 -->
-				<n-space>
+				<n-space :size="2">
 					<n-tag
 						v-for="(n, index) in item.tags"
 						:key="index"

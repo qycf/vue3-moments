@@ -3,13 +3,15 @@ import '@unocss/reset/tailwind-compat.css' // unocss reset
 import 'virtual:uno.css'
 import 'virtual:unocss-devtools'
 import { isDark } from 'vue-dark-switch'
-
+import App from './App.vue'
 // 你自定义的 css
 import './styles/main.css'
 
 // 暗黑模式监控判断
-if (isDark) {
+if (isDark.value) {
 	document.body.setAttribute('arco-theme', 'dark')
+} else {
+	document.body.removeAttribute('arco-theme')
 }
 watch(isDark, (newIsDark) => {
 	if (newIsDark) {
@@ -18,8 +20,6 @@ watch(isDark, (newIsDark) => {
 		document.body.removeAttribute('arco-theme')
 	}
 })
-
-import App from './App.vue'
 
 const app = createApp(App)
 
