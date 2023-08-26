@@ -5,7 +5,7 @@ translate: translate
 copyLink: copyLink
 pined: Pined
 dashboard: dashboard
-settings: settings
+settings: setting
 moments: moments
 scenery: scenery
 portrait: portrait
@@ -14,6 +14,19 @@ humanity: humanity
 Profile: Profile
 Galleries: Galleries
 Navigation: Navigation
+Hot: Hot
+tags: tags
+date: date
+search: search
+keyword: keyword
+actions: actions
+new moments: new moments
+moments/new: new moments
+ban: ban
+edit: Edit
+title: title
+latestTime: latest time
+
 
 uninterested: uninterested
 block the author: block the author
@@ -22,7 +35,7 @@ shit: shit
 home: home
 about: about
 echarts: echarts
-edit: Edit
+
 to test HMR: to test HMR
 check out: Check out
 The total number of views is: The total number of views is

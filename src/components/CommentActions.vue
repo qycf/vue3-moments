@@ -9,7 +9,7 @@
 							<ArrowDropUpOutlined />
 						</n-icon>
 					</template>
-					<span class="text-xs"> 赞 {{ 83 + (like ? 1 : 0) }} </span>
+					<span class="text-xs"> 赞 {{ start }}</span>
 				</n-button>
 				<n-button tertiary size="small" type="tertiary" @click="onLikeChange">
 					<template #icon>
@@ -65,6 +65,10 @@ import {
 	PersonRemoveAlt1Outlined,
 	MoodBadOutlined,
 } from '@vicons/material'
+
+defineProps({
+	start: Number
+})
 
 import useUserStore from '~/stores/user'
 

@@ -20,16 +20,27 @@ shit: 垃圾内容
 Profile: 成份
 Galleries: 画廊
 Navigation: 导航
+Hot: 热榜
 
 
 dashboard: 仪表盘
 settings: 设置
 moments: 动态
+tags: 标签
+date: 日期
+search: 搜索
+keyword: 关键字
+actions: 操作
+new moments: 新动态
+moments/new: 新动态
+edit: 编辑
+ban: 冻结
+title: 标题
+latestTime: 最近更新
 
 home: 主页
 about: 关于
 echarts: 图表
-edit: 编辑
 to test HMR: 测试热更新
 check out: 查看
 The total number of views is: 总浏览数

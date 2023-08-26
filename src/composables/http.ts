@@ -28,7 +28,7 @@ http.interceptors.response.use(
 		// 2xx 范围内的状态码都会触发该函数。
 		// 对响应数据进行格式化
 		if (response.data) {
-			return response.data
+			return response.data.data
 		}
 		return response
 	},

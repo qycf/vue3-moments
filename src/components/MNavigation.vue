@@ -1,21 +1,6 @@
 <script setup lang="ts">
 import { SwitchIcon } from 'vue-dark-switch'
 const { locale } = useI18n()
-
-// const routes = getRoutes()
-// 	.filter((r) => !r.path.includes('notFound'))
-// 	.map((r) => {
-// 		let { path, name } = r
-// 		if (path === '/') {
-// 			return { path, name: 'home' }
-// 		}
-
-// 		if (!name) {
-// 			name = path
-// 		}
-
-// 		return { path, name: name.toString().slice(1).replaceAll('/', ' · ') }
-// 	})
 </script>
 
 <template>

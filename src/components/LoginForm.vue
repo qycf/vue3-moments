@@ -1,16 +1,14 @@
 <template>
-	<n-modal :show="userStore.showModalRef">
-		<n-card
-			:style="`max-width:${isLaptop ? `450px` : `350px`}`"
-			:bordered="false"
-			size="huge"
-			role="dialog"
-			aria-modal="true"
-		>
+	<n-modal :show="userStore.showModalRef" :auto-focus="false">
+		<n-card :style="`max-width:${isLaptop ? `450px` : `350px`}`" :bordered="false" size="huge" role="dialog"
+			aria-modal="true">
 			<template #header>
 				<n-space justify="space-between">
 					<span>登录</span>
-					<span @click="userStore.showModalRef = false">x</span>
+					<!-- <span @click="userStore.showModalRef = false">x</span> -->
+					<n-button quaternary size="small" :focusable="false" @click="userStore.showModalRef = false">
+						X
+					</n-button>
 				</n-space>
 			</template>
 			<n-form ref="formRef">
@@ -18,12 +16,7 @@
 					<n-input @keydown.enter.prevent />
 				</n-form-item>
 				<n-form-item path="password" label="密码">
-					<n-input
-						type="password"
-						placeholder="密码"
-						:maxlength="8"
-						@keydown.enter.prevent
-					/>
+					<n-input type="password" placeholder="密码" :maxlength="8" @keydown.enter.prevent />
 				</n-form-item>
 				<n-button round block> 登录 </n-button>
 				<div class="mt-2">
@@ -49,4 +42,10 @@ defineProps({
 	},
 })
 </script>
-<style scoped></style>
+<style scoped>
+
+.n-modal-mask{
+	backdrop-filter: blur(25px) !important;
+}
+
+</style>

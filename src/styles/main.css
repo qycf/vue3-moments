@@ -3,11 +3,20 @@
 
 html.dark {
 	background: #171717	 !important;
+	--w-e-textarea-bg-color: #333;
+    --w-e-textarea-color: #fff;
+	--w-e-toolbar-bg-color: #333;
+	--w-e-toolbar-border-color: #333 !important;
 }
 
 html {
 	background: #f3f3f3 !important;
-	overflow: hidden !important;
+	overflow-x: hidden !important;
+	--w-e-toolbar-border-color: #fff !important;
+}
+
+.n-modal-mask {
+	backdrop-filter: blur(10px) !important;
 }
 
 /* html::-webkit-scrollbar,body::-webkit-scrollbar{

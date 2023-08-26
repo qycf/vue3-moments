@@ -9,6 +9,9 @@ export default function scroll(elRef: any = null) {
 	const scrollTop = ref(0) // 已经滚动区域的高
 	const clientHeight = ref(0) // 可视区高度
 
+	// vueUse判断是否为移动端
+	const isMobile = useMediaQuery('(max-width: 768px)')
+
 	// 使用lodash实现节流效果
 	const scroll = throttle(() => {
 		if (!elRef) {
@@ -17,7 +20,7 @@ export default function scroll(elRef: any = null) {
 			clientHeight.value = document.documentElement.clientHeight
 		} else {
 			scrollHeight.value = el.scrollHeight
-			scrollTop.value = el.scrollTop
+			scrollTop.value = isMobile ? el.scrollTop + 0.5 : el.scrollTop
 			clientHeight.value = el.clientHeight
 		}
 		// 以滚动高度 + 当前视口高度  >= 可滚动高度 = 触底
@@ -32,7 +35,10 @@ export default function scroll(elRef: any = null) {
 	// 页面初始化注册scroll事件
 	onMounted(() => {
 		// dom 挂载时判断外界是否传入dom实例
-		if (elRef) el = elRef.value
+		if (elRef) {
+			// el = elRef.value.containerRef
+			el = elRef.value
+		}
 		el.addEventListener('scroll', scroll)
 	})
 
