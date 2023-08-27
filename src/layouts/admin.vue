@@ -83,7 +83,7 @@
 </template>
 
 <script lang="ts" setup>
-import { h, defineComponent, ref } from 'vue'
+import { h } from 'vue'
 import { NButton, NIcon } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import { CameraSharp, SettingsSharp, MenuOpenSharp, MenuSharp, AddAPhotoSharp } from '@vicons/material'
@@ -125,8 +125,6 @@ const handleClose = (name: string) => {
 }
 
 onMounted(() => {
-	console.log(menuValue.value);
-
 	if (router.currentRoute.value.meta.name as string !== 'new moments') {
 		handleAdd(router.currentRoute.value.meta.name as string)
 	}
@@ -151,32 +149,55 @@ const handleAdd = (key: any) => {
 // 菜单数组
 const menuOptions = [
 	{
-		label: () =>
-			h(
-				RouterLink,
-				{
-					to: {
-						name: '/admin/moments/new',
-					}
-				},
-				{ default: () => t('new moments') }
-			),
-		key: 'new moments',
-		icon: renderIcon(AddAPhotoSharp),
-	},
-	{
-		label: () =>
-			h(
-				RouterLink,
-				{
-					to: {
-						name: '/admin/moments/',
-					}
-				},
-				{ default: () => t('moments') }
-			),
+		label: (() => {
+			return t('moments')
+		}) as any,
 		key: 'moments',
 		icon: renderIcon(CameraSharp),
+		children: [
+			{
+				label: () =>
+					h(
+						RouterLink,
+						{
+							to: {
+								name: '/admin/moments/',
+							}
+						},
+						{ default: () => t('moments') }
+					),
+				key: 'all moments',
+				icon: renderIcon(CameraSharp),
+			},
+			{
+				label: () =>
+					h(
+						RouterLink,
+						{
+							to: {
+								name: '/admin/moments/new',
+							}
+						},
+						{ default: () => t('new moments') }
+					),
+				key: 'new moments',
+				icon: renderIcon(AddAPhotoSharp),
+			},
+			{
+				label: () =>
+					h(
+						RouterLink,
+						{
+							to: {
+								name: '/admin/moments/tags',
+							}
+						},
+						{ default: () => t('tags') }
+					),
+				key: 'tags',
+				icon: renderIcon(AddAPhotoSharp),
+			},
+		]
 	},
 	{
 		label: () =>

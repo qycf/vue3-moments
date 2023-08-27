@@ -1,3 +1,5 @@
+import { useRequest } from 'vue-request'
+
 export interface TAGS {
 	name: string
 	color: string
@@ -22,4 +24,9 @@ export interface MOMENTS_REQ {
 	size: number
 	totalPage: number
 	rows: Array<MOMENTS>
+}
+
+export const newMoments = (moments: any) => {
+	const { data } = useRequest(() => http.post('/moments', moments))
+	return data
 }

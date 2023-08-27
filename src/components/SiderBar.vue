@@ -83,7 +83,7 @@
 					{{ locale == '简体中文' ? 'EN' : '简中' }}
 				</n-button>
 			</n-space>
-		</n-card>
+					</n-card>
 	</n-space>
 </template>
 

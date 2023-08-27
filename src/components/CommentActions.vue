@@ -76,7 +76,6 @@ const { t } = useI18n()
 
 const userStore = useUserStore()
 
-const like = ref(false)
 const onLikeChange = () => {
 	if (!userStore.isLogin) {
 		console.log(123)
