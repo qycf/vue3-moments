@@ -1,5 +1,29 @@
 @import './md.css';
 
+[data-starport-craft] {
+  background: #0805;
+}
+[data-starport-proxy]:not([data-starport-landed]) {
+  background: #8005;
+}
+
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.page-fade-enter-from,
+.page-fade-leave-to {
+  opacity: 0;
+}
+
+.debug [data-starport-craft] {
+  background: #0805;
+}
+.debug [data-starport-proxy]:not([data-starport-landed]) {
+  background: #8005;
+}
+
 
 html.dark {
 	background: #171717	 !important;
@@ -12,7 +36,8 @@ html.dark {
 
 html {
 	background: #f3f3f3 !important;
-	overflow: hidden !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
 	--w-e-toolbar-border-color: #fff !important;
 }
 
@@ -25,6 +50,8 @@ html {
 	width:0px;
 	height:0px;
 } */
+
+
 
 
 

@@ -22,5 +22,4 @@ watch(isDark, (newIsDark) => {
 })
 
 const app = createApp(App)
-
 app.mount('#app')

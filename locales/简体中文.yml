@@ -10,6 +10,7 @@ pined: 置顶
 scenery: 风光
 portrait: 人像
 humanity: 人文
+start: 赞
 
 uninterested: 不感兴趣
 block the author: 屏蔽作者
@@ -37,6 +38,8 @@ edit: 编辑
 ban: 冻结
 title: 标题
 latestTime: 最近更新
+Publish: 发布
+
 
 home: 主页
 about: 关于

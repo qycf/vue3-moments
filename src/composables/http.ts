@@ -26,6 +26,14 @@ http.interceptors.request.use(
 http.interceptors.response.use(
 	function (response) {
 		// 2xx 范围内的状态码都会触发该函数。
+
+		// 获取响应数据code
+		const code = response.data?.code
+		if (code !== 200) {
+			toast.warning(response.data?.msg ?? '未知响应错误')
+			return
+		}
+
 		// 对响应数据进行格式化
 		if (response.data) {
 			return response.data.data

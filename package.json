@@ -50,7 +50,6 @@
     "changelogen": "^0.5.4",
     "cross-env": "^7.0.3",
     "echarts": "^5.4.3",
-    "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-vue": "^9.17.0",
@@ -119,11 +118,14 @@
     "url": "https://github.com/dishait/tov-template"
   },
   "dependencies": {
+    "@alova/scene-vue": "^1.1.9",
     "@types/lodash": "^4.14.197",
     "@vicons/material": "^0.12.0",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-vue": "^5.1.12",
+    "alova": "^2.11.0",
     "animate.css": "^4.1.1",
+    "eslint": "^8.48.0",
     "lodash": "^4.17.21"
   }
 }

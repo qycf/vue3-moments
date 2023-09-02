@@ -10,6 +10,7 @@ moments: moments
 scenery: scenery
 portrait: portrait
 humanity: humanity
+start: start
 
 Profile: Profile
 Galleries: Galleries
@@ -26,7 +27,7 @@ ban: ban
 edit: Edit
 title: title
 latestTime: latest time
-
+Publish: Publish
 
 uninterested: uninterested
 block the author: block the author

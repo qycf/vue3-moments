@@ -1,36 +1,48 @@
 <template>
 	<n-space vertical>
-		<n-card :bordered="false" :style="`background-color: ${isDark ? `#3c3c3c` : `#fff`};`">
+		<n-card
+			:bordered="false"
+			:style="`background-color: ${isDark ? `#3c3c3c` : `#fff`};`"
+		>
 			<template #header>
 				<n-icon color="#b7a34e" size="24">
 					<PersonFilled />
 				</n-icon>
 			</template>
 			<template #cover>
-				<img :src="siteConfig?.cover" />
+				<img :src="siteSettings?.cover" />
 			</template>
 			<div>
 				<div class="flex self-center">
-					<n-avatar size="large" src="https://gallerys-1305976148.cos.ap-guangzhou.myqcloud.com/qiuyue2525.JPG" />
+					<n-avatar
+						size="large"
+						src="https://gallerys-1305976148.cos.ap-guangzhou.myqcloud.com/qiuyue2525.JPG"
+					/>
 					<div class="my-auto ml-2">
 						<div class="name text-lg -mt-2" style="color: #b7a34e">
-							{{ siteConfig?.nickname }}
+							{{ siteSettings?.nickname }}
 						</div>
-						<div class="date" :style="{ color: isDark ? '#8f918e' : '#a6a6a6' }">
-							{{ siteConfig?.description }}
+						<div
+							class="date"
+							:style="{ color: isDark ? '#8f918e' : '#a6a6a6' }"
+						>
+							{{ siteSettings?.description }}
 						</div>
 					</div>
 				</div>
 			</div>
 		</n-card>
-		<n-card :bordered="false" :style="`background-color: ${isDark ? `#3c3c3c` : `#fff`};`">
+		<n-card
+			:bordered="false"
+			:style="`background-color: ${isDark ? `#3c3c3c` : `#fff`};`"
+		>
 			<template #header>
 				<n-icon color="#b7a34e" size="24">
 					<LocalFireDepartmentOutlined />
 				</n-icon>
 			</template>
 			<n-config-provider :theme-overrides="isDark ? darkThemeOverrides : null">
-				<n-list hoverable clickable type="error">
+				<n-list clickable hoverable type="error">
 					<n-list-item>
 						<template #prefix>
 							<n-icon color=" #b7a34e">
@@ -41,12 +53,15 @@
 							<span>
 								{{ hotList[0].name }}
 							</span>
-							<span style="color: #8790a4; font-size: xx-small;">
+							<span style="color: #8790a4; font-size: xx-small">
 								{{ hotList[0].count }}
 							</span>
 						</n-space>
 					</n-list-item>
-					<n-list-item v-for="i, index in hotList.slice(1, hotList.length)">
+					<n-list-item
+						v-for="(i, index) in hotList.slice(1, hotList.length)"
+						:key="index"
+					>
 						<template #prefix>
 							<n-icon color="#b7a34e">
 								{{ index + 1 }}
@@ -56,7 +71,7 @@
 							<span>
 								{{ i.name }}
 							</span>
-							<span style="color: #8790a4; font-size: xx-small;">
+							<span style="color: #8790a4; font-size: xx-small">
 								{{ i.count }}
 							</span>
 						</n-space>
@@ -65,7 +80,10 @@
 			</n-config-provider>
 		</n-card>
 
-		<n-card :bordered="false" :style="`background-color: ${isDark ? `#3c3c3c` : `#fff`};`">
+		<n-card
+			:bordered="false"
+			:style="`background-color: ${isDark ? `#3c3c3c` : `#fff`};`"
+		>
 			<template #header>
 				<n-icon color="#b7a34e" size="24">
 					<MenuFilled />
@@ -78,34 +96,42 @@
 				<n-button quaternary size="small" :focusable="false">
 					<switch-icon />
 				</n-button>
-				<n-button quaternary size="small" :focusable="false"
-					@click="locale = locale == '简体中文' ? 'English' : '简体中文'">
+				<n-button
+					quaternary
+					size="small"
+					:focusable="false"
+					@click="locale = locale == '简体中文' ? 'English' : '简体中文'"
+				>
 					{{ locale == '简体中文' ? 'EN' : '简中' }}
 				</n-button>
 			</n-space>
-					</n-card>
+		</n-card>
 	</n-space>
 </template>
 
 <script lang="ts" setup>
 import { SwitchIcon } from 'vue-dark-switch'
-import { LocalFireDepartmentOutlined, PersonFilled, MenuFilled, VerticalAlignTopOutlined } from '@vicons/material'
+import {
+	LocalFireDepartmentOutlined,
+	PersonFilled,
+	MenuFilled,
+	VerticalAlignTopOutlined,
+} from '@vicons/material'
 import { darkThemeOverrides } from '~/styles/theme'
 const { locale } = useI18n()
-import { SITE_CONFIG } from '~/api/siteConfig'
-
+import { SITE_SETTINGS } from '~/api/siteSettings'
 
 const hotList = ref([
 	{
 		id: 3,
 		name: '月亮',
 		count: 9,
-		isTop: true
+		isTop: true,
 	},
 	{
 		id: 1,
 		name: '人文',
-		count: 1
+		count: 1,
 	},
 	{
 		id: 2,
@@ -115,7 +141,7 @@ const hotList = ref([
 ])
 
 defineProps<{
-	siteConfig: SITE_CONFIG | undefined
+	siteSettings: SITE_SETTINGS | undefined
 	isLaptop: boolean
 	isDark: boolean
 }>()
@@ -127,10 +153,15 @@ defineProps<{
 	}
 }
 
-@media screen and (max-width: 1476px) {
+@media (min-width: 1275px) and (max-width: 1476px) {
 	.n-card {
-		max-width: 250px;
+		max-width: 16.5vw;
+	}
+}
+@media screen and (max-width: 1275px) {
+	.n-card {
+		max-width: 20.7vw;
 	}
 }
 </style>
-~/api/siteConfig
+~/api/siteConfig~/api/siteSettings

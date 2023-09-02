@@ -67,7 +67,7 @@ import {
 } from '@vicons/material'
 
 defineProps({
-	start: Number
+	start: Number,
 })
 
 import useUserStore from '~/stores/user'
