@@ -4,31 +4,91 @@
 		<div class="nav bg-black" ref="nav">
 			<n-grid :cols="24" item-responsive responsive="screen">
 				<n-gi span="4" offset="3">
-					123
+					Nav
 				</n-gi>
 			</n-grid>
 		</div>
-		<div class="index-magazine magazine-fixed ">
-			<div class="bg-effect bg-dark bg-image-color"></div>
-			<div class="container111" style="height: 100vh;">
-				<div class="image1">
+		<div style="padding-top: 5rem; background-color: #181818; position: relative">
+			<div style="
+          background-image: url('https://globals.static.nicetheme.xyz/apollo.2.demo.nicetheme.xyz/wp-content/uploads/2020/08/2020082806171782.jpg');
+          opacity: 0.2;
+          filter: blur(10px);
+          transform: scale(1.1);
+          position: absolute;
+          max-width: 100%;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          overflow: hidden;
+        "></div>
+			<n-grid cols="8" item-responsive responsive="screen" class=" px-40 m-auto pb-8 relative"
+				style="max-width: 1280px;height: 65vh;">
+				<n-grid-item span="4" class="overflow-hidden">
+					<div class="h-full">
+						<div class="media-content "
+							style="
+              background-image: url('https://globals.static.nicetheme.xyz/apollo.2.demo.nicetheme.xyz/wp-content/uploads/2020/08/2020082806171782.jpg');">
+						</div>
+					</div>
+				</n-grid-item>
+				<n-grid-item span="4" class="overflow-hidden">
+					<n-grid cols="2" style="height: 65vh;">
+						<n-grid-item v-for="i in 4" span="1" class="overflow-hidden">
+							<div class="h-full">
+								<div class="media-content "
+									style="
+              background-image: url('https://globals.static.nicetheme.xyz/apollo.2.demo.nicetheme.xyz/wp-content/uploads/2020/08/2020082806171782.jpg');">
+								</div>
+							</div>
+						</n-grid-item>
+					</n-grid>
 
-					<n-image width="100" src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
-						preview-disabled />
-				</div>
-				<div class="images">
-					<div class="image2"><n-image width="100"
-							src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" preview-disabled /></div>
-					<div class="image3"><n-image width="100"
-							src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" preview-disabled /></div>
-					<div class="image4"><n-image width="100"
-							src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" preview-disabled /></div>
-					<div class="image5"><n-image width="100"
-							src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" preview-disabled /></div>
-				</div>
-			</div>
+				</n-grid-item>
 
+			</n-grid>
+			<!-- <div class="parent object-cover relative pb-5 h-1/3" style="width: 1250px; margin: auto; z-index: 999;">
+				<div class="div1">
+					<div class="media-content" style="
+              background-image: url('https://globals.static.nicetheme.xyz/apollo.2.demo.nicetheme.xyz/wp-content/uploads/2020/08/2020082806171782.jpg');
+              object-fit: cover;
+              height: 100%;
+            ">1</div>
+				</div>
+				<div class="div2 media-content" style="
+            background-image: url('https://globals.static.nicetheme.xyz/apollo.2.demo.nicetheme.xyz/wp-content/uploads/2020/08/2020082806171782.jpg');
+            object-fit: cover;
+            height: 100%;
+          ">
+
+				</div>
+				<div class="div3 media-content" style="
+            background-image: url('https://globals.static.nicetheme.xyz/apollo.2.demo.nicetheme.xyz/wp-content/uploads/2020/08/2020082806171782.jpg');
+            object-fit: cover;
+            height: 100%;
+          ">
+					3
+				</div>
+				<div class="div4 media-content" style="
+            background-image: url('https://globals.static.nicetheme.xyz/apollo.2.demo.nicetheme.xyz/wp-content/uploads/2020/08/2020082806171782.jpg');
+            object-fit: cover;
+            height: 100%;
+          ">
+					4
+				</div>
+				<div class="div5 media-content" style="
+            background-image: url('https://globals.static.nicetheme.xyz/apollo.2.demo.nicetheme.xyz/wp-content/uploads/2020/08/2020082806171782.jpg');
+            object-fit: contain;
+            height: 100%;
+          ">
+					5
+				</div>
+			</div> -->
 		</div>
+
 		<div id="container" class="mx-auto ">
 			<!-- 移动端头部cover -->
 			<n-grid :cols="24" item-responsive responsive="screen">
@@ -264,56 +324,65 @@ useInfiniteScroll(
 const { data: siteConfigRsp } = siteSettings()
 
 </script>
-<style >
-.container111 {
-	display: flex;
-	flex-wrap: wrap;
-	/* 当容器宽度不足时换行 */
-	gap: 10px;
-	/* 可选的间隙 */
-}
-
-.image1 {
-	flex: 1 0 50%;
-	/* 图片1占据一半的宽度 */
-}
-
-.images {
-	flex: 1 0 50%;
-	/* 剩下的四张图片均匀分布 */
-	display: flex;
-	flex-wrap: wrap;
-	/* 当图片宽度不足时换行 */
-}
-
-.images>div {
-	flex: 1 0 50%;
-	/* 每张图片占据一半的宽度 */
-}
-
-/* 根据需要，可以进一步调整图片的样式和布局 */
-
-
-.index-magazine .magazine-fixed {
-	background-color: var(--bg-dark);
-	padding-top: 5rem;
-	position: relative;
+<style scoped>
+.media-content {
+	transition: all .444s ease-in-out;
+	background-color: rgba(120, 120, 120, .1);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 100%;
+	width: 100%;
 	overflow: hidden;
-	padding-bottom: 2rem;
+	object-fit: cover;
 }
 
-.magazine-fixed .bg-image-color {
-	opacity: .6;
+.media-content:hover {
+	transition: all .444s ease-in-out;
+	transform: scale(1.05);
 }
 
-.bg-effect {
-	background-image: url("https://gallerys-1305976148.cos.ap-guangzhou.myqcloud.com/2023/8/30/a12e0d889b714256ac7dc3fab7b7fa7f.jpg");
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+.parent {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-template-rows: repeat(8, 1fr);
+	grid-column-gap: 5px;
+	grid-row-gap: 5px;
+	height: 66vh !important;
 }
+
+.div1 {
+	grid-area: 1 / 1 / 9 / 5;
+	background-position: 50% 50%;
+	overflow: hidden;
+
+}
+
+.div2 {
+	grid-area: 1 / 5 / 5 / 7;
+	background-position: 50% 50%;
+}
+
+.div3 {
+	grid-area: 1 / 7 / 5 / 9;
+	background-position: 50% 50%;
+}
+
+.div4 {
+	grid-area: 5 / 5 / 9 / 7;
+	background-position: 50% 50%;
+}
+
+.div5 {
+	grid-area: 5 / 7 / 9 / 9;
+	background-position: 50% 50%;
+}
+
+
+
+
+
 
 .nav {
 	background-color: transparent;

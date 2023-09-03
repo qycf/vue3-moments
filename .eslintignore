@@ -3,3 +3,4 @@ pages
 dist
 node_modules
 presets/types
+src
