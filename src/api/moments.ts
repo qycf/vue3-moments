@@ -1,6 +1,6 @@
 import { alovaInstance } from '~/composables/request'
 import { useRequest } from 'alova'
-import { usePagination, useRetriableRequest } from '@alova/scene-vue'
+import { usePagination } from '@alova/scene-vue'
 
 export const saveOrUpdateMoments = () => {
 	const { data, send } = useRequest(

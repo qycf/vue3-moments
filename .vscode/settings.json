@@ -57,5 +57,9 @@
   },
   "[plaintext]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "[postcss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "vue.codeActions.enabled": false
 }

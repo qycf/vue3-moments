@@ -66,7 +66,7 @@
 
 <script lang="ts" setup>
 import { CollapseProps, NTag, UploadFileInfo } from 'naive-ui'
-import { AddAPhotoSharp } from '@vicons/material'
+import { AddAPhotoSharp, AddLinkSharp } from '@vicons/material'
 import '@wangeditor/editor/dist/css/style.css'
 import { onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'

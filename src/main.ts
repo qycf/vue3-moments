@@ -22,4 +22,6 @@ watch(isDark, (newIsDark) => {
 })
 
 const app = createApp(App)
+// 挂在isDark为全局属性
+app.config.globalProperties.$isDark = isDark
 app.mount('#app')

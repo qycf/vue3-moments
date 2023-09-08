@@ -1,5 +1,20 @@
 @import './md.css';
 
+
+.n-tabs-wrapper{
+	padding-left: .625rem;
+	padding-right: .625rem;
+}
+
+.n-drawer-header__main{
+	width: 100%;
+}
+
+.n-drawer-mask{
+	-webkit-backdrop-filter: saturate(180%) blur(6px);
+    backdrop-filter: saturate(180%) blur(6px);
+}
+
 [data-starport-craft] {
   background: #0805;
 }
@@ -41,10 +56,10 @@ html {
 	--w-e-toolbar-border-color: #fff !important;
 }
 
-.n-modal-mask {
+/* .n-modal-mask {
 	backdrop-filter: blur(10px) !important;
 	-webkit-backdrop-filter: blur(10px) !important;
-}
+} */
 
 /* html::-webkit-scrollbar,body::-webkit-scrollbar{
 	width:0px;
@@ -77,14 +92,16 @@ html {
 	height: 2px;
 }
 
+
+
 /*
 * 全局滚动条
 */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
 	width: 8px;
 	height: 11px;
 	background-color: rgb(246, 247, 248);
-}
+} */
 
 /* 滚动条颜色 */
 ::-webkit-scrollbar-thumb {

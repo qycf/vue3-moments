@@ -125,7 +125,7 @@ import { naiveTheme, SwitchIcon } from 'vue-dark-switch'
 import { RouterLink } from 'vue-router'
 import { isDark } from 'vue-dark-switch'
 import type { Component } from 'vue'
-import { zhCN, enUS } from 'naive-ui'
+import { zhCN } from 'naive-ui'
 const { t, locale } = useI18n()
 const collapsed = ref(false)
 
@@ -133,11 +133,11 @@ const router = useRouter()
 const menuValue = ref(router.currentRoute.value.meta.name as string)
 
 // 菜单选中的回调
-const handleUpdateValue = (key: string, item: MenuOption) => {
+const handleUpdateValue = (key: string) => {
 	menuValue.value = key
 }
 
-watch(menuValue, (newVal, oldVal) => {
+watch(menuValue, (newVal) => {
 	const index = tabs.value.findIndex((t: any) => newVal === t.key)
 	if (index === -1) {
 		handleAdd(newVal)
