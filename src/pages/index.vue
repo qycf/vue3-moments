@@ -9,18 +9,24 @@
 			justify-content: space-between;
 			width: 100%;
 		">
-				<img class="logo"
-					src="/logo_light.png"
-					alt="show your face">
-
+				<img class="logo" src="/logo_light.png" alt="show your face">
 				<n-menu v-if="!isMobile" v-model:value="activeKey" mode="horizontal" :options="menuOptions" />
-
 				<div v-if="isMobile" class="menu">
 					<n-icon size="24px" color="#fff" @click="drawer = true">
 						<MenuOutlined />
 					</n-icon>
 				</div>
 				<n-space v-else class="ml-auto">
+					<ul class="flex items-center gap-2 text-sm font-medium">
+						<li>
+							<span class="h-10 w-10 flex items-center justify-center " style="color: #E8E8E8;">
+								<SwitchIcon unmount-persets />
+							</span>
+						</li>
+						<li>
+						<Dropdown />
+					</li>
+					</ul>
 					<n-button round color="#e8e8e8" text-color="#5d636b" @click="$router.push('/auth/register')">
 						注册
 					</n-button>
@@ -75,7 +81,8 @@
 		</div> -->
 		<div id="container" :class="`mx-auto`" :style="`padding-top: ${isLaptop ? `5rem` : `3.5rem`};`">
 			<n-grid :cols="24" item-responsive responsive="screen">
-				<n-gi v-if="!isLaptop" span="24 m:3 l:0" class="mb-2">
+				<n-gi span="0 m:4"></n-gi>
+				<n-gi span="24 m:15" class="mb-2 px-2">
 					<div class="index_banner" :class="isDark ? `` : `bg-white`" :style="`background-image: url(&quot;${siteConfigRsp?.cover
 						}&quot;);background-color: ${isDark ? `#3c3c3c` : `#fff`};`
 						">
@@ -90,19 +97,21 @@
 									</div>
 								</div>
 								<div class="avatar">
-									<img :src="siteConfigRsp?.avatar" />
+									<img v-if="siteConfigRsp?.avatar" :src="siteConfigRsp?.avatar" />
+									<n-skeleton v-else :width="50" :height="50" size="medium" style="border-radius: 8px;" />
 								</div>
 							</div>
 						</div>
 					</div>
 				</n-gi>
-				<n-gi span="0 m:4 l:4" offset="0 m:2 l:3">
-					<SiderBar :siteSettings="siteConfigRsp" :is-laptop="isLaptop" :is-dark="isDark" />
+				<n-gi span="0 m:4"></n-gi>
+				<n-gi span="0 m:4">
+					<!-- <SiderBar :siteSettings="siteConfigRsp" :is-laptop="isLaptop" :is-dark="isDark" /> -->
 				</n-gi>
-				<n-gi span="24 m:15 l:13">
+				<n-gi span="24 m:15">
 					<div ref="containerRef" class="moments_main px-2" style="width: 100vw">
 						<n-grid x-gap="12" :cols="24" item-responsive responsive="screen">
-							<n-gi span="24 m:16 l:13">
+							<n-gi span="24 m:15">
 								<Moments :data="momentsList" :is-dark="isDark" />
 								<transition enter-active-class="animate__animated"
 									leave-active-class="animate__animated animate__backOutLeft">
@@ -143,6 +152,8 @@
 					</div>
 					<n-empty v-show="isLastPage" description="没有更多了" :show-icon="false">
 					</n-empty>
+				</n-gi>
+				<n-gi span="0 m:4">
 				</n-gi>
 			</n-grid>
 			<n-back-top :right="15" />
@@ -333,7 +344,7 @@ import { themeOverrides, darkThemeOverrides } from '~/styles/theme'
 import { useInfiniteScroll } from '@vueuse/core'
 import { usePagination } from "@alova/scene-vue";
 import { RouterLink } from 'vue-router'
-
+import { SwitchIcon } from 'vue-dark-switch'
 
 const { start, done } = useNProgress()
 
