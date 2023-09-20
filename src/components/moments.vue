@@ -1,12 +1,11 @@
 <template>
 	<div>
 		<TransitionGroup name="list" tag="ul">
-			<div v-for="(item, index) in data" :key="index" class="hover mb-2.5 p-2.5" style="border-radius: 0.75rem"
+			<div v-for="(item, index) in   data  " :key="index" class="hover mb-2.5 p-2.5" style="border-radius: 0.75rem"
 				:style="{ background: isDark ? '#3c3c3c' : '#fff' }">
 				<!-- 动态顶部 -->
 				<div v-if="item.isTop === 1" :style="{ color: isDark ? '#8f918e' : '#a6a6a6' }">
-					<!-- <icon-to-top class="mx-2" />{{ $t('pined') }} -->
-					<icon-to-top class="mx-2" />{{ $t('pined') }}
+					<icon-to-top class="mx-2" />置顶
 					<n-divider style="
 							margin-top: 0.5rem !important;
 							margin-bottom: 0.5rem !important;
@@ -24,15 +23,15 @@
 						<div class="right">
 							<div class="name text-lg" style="color: #b7a34e">qiuyue2525</div>
 							<div class="date" :style="{ color: isDark ? '#8f918e' : '#a6a6a6' }">
-								{{ dateComputed('2023-08-04 17:02:11') }}
+								{{ updateTimeComputed(item.createTime, item.updateTime) }}
 							</div>
 						</div>
 					</div>
 					<!-- 标签 -->
 					<n-space :size="2">
-						<!-- <n-tag v-for="(n, index) in tagsComputed(item.tags)" :key="index" :bordered="false" round size="small">
-						{{ $t(n) }}
-					</n-tag> -->
+						<n-tag v-for="i in toTags(item.tags)" :key="index" :bordered="false" round size="small">
+							{{ i }}
+						</n-tag>
 					</n-space>
 				</div>
 				<!-- 动态内容 -->
@@ -40,14 +39,16 @@
 					<!-- 文本内容 -->
 					<div class="content" v-html="item.content"></div>
 					<!-- 图片 -->
-					<a-grid item-responsive class="mt-1" :col-gap="1" :row-gap="1" :cols="3">
-						<a-image-preview-group infinite>
-							<a-grid-item v-for="i in item?.images" :key="i.id">
-								<a-image width="100%" height="100%" fit="cover" :src="i.url" show-loader>
-								</a-image>
-							</a-grid-item>
-						</a-image-preview-group>
-					</a-grid>
+					<n-grid class="mt-1" cols="24" :x-gap="2" item-responsive responsive="screen">
+						<n-grid-item :span="`${imagesCountComputed(item.images)} m:6`" v-for="i, index in   item.images  "
+							:key="index">
+							<a-image :height="isMobile && item.images.length == 1 ? `350px` : `100%`" width="100%"
+								fit="cover" :src="i.url" :key="index" show-loader :preview-props="{
+									actionsLayout: ['rotateRight', 'zoomIn', 'zoomOut']
+								} as any">
+							</a-image>
+						</n-grid-item>
+					</n-grid>
 					<!-- 操作栏 -->
 					<n-message-provider>
 						<CommentActions :start="item.start" class="mt-4" />
@@ -61,8 +62,14 @@
 <script lang="ts" setup>
 import { IconToTop } from '@arco-design/web-vue/es/icon'
 import { MOMENTS } from '@/api/moments'
-// 获取当前时间戳
-const timestamp = Date.now() / 1000
+import dayjs from 'dayjs'
+
+
+// 获取当前时间
+const now = dayjs().date()
+// 判断当前是否移动端
+const isMobile = useMediaQuery('(max-width: 768px)')
+
 defineProps({
 	data: {
 		type: Array as PropType<MOMENTS[]>,
@@ -74,27 +81,75 @@ defineProps({
 	},
 })
 
-// 时间计算
-const dateComputed = computed(() => {
-	return (dateStr: string) => {
-		const date = new Date(dateStr)
-		const month = date.getMonth() + 1
-		const day = date.getDate()
-		const commentsTimestamp = date.getTime() / 1000
-		const hours = date.getHours()
-		const minutes = date.getMinutes()
-		const minutesStr = minutes < 10 ? `0${minutes}` : `${minutes}`
-		const timeDifference = timestamp - commentsTimestamp
-		if (timeDifference < 86400) {
-			return `今天 ${hours}:${minutesStr}`
-		} else if (timeDifference < 172800) {
-			return `昨天 ${hours}:${minutesStr}`
-		} else if (timeDifference < 259200) {
-			return `前天 ${hours}:${minutesStr}`
-		}
-		return `${month}月${day}日 ${hours}:${minutesStr}`
+const formatDate = (date: number) => {
+	return date < 10 ? `0${date}` : `${date}`;
+};
+
+const updateTimeComputed = (createTime: string, updateTime: string) => {
+	if (isUpdateComputed(createTime, updateTime)) {
+		return `${dateComputed(createTime)} 修改于 ${dateComputed(updateTime)}`;
 	}
-})
+	return `${dateComputed(createTime)}`;
+
+
+};
+
+const dateComputed = (dateTime: string) => {
+	const date = dayjs(dateTime, "YYYY-MM-DD HH:mm:ss");
+	const month = formatDate(date.month() + 1);
+	const dayOfMonth = date.date();
+	const hour = formatDate(date.hour());
+	const minute = formatDate(date.minute());
+	const hhMM = `${hour}:${minute}`;
+
+	const difference = now - dayOfMonth
+
+	switch (difference) {
+		case 0:
+			return `今天 ${hhMM}`;
+		case 1:
+			return `昨天 ${hhMM}`;
+		case 2:
+			return `前天 ${hhMM}`;
+		default:
+			break;
+	}
+	if (difference > 2 && difference <= 7) {
+		return `${difference}天前 ${hhMM}`;
+	}
+
+	return `${date.year()}-${month}-${dayOfMonth} ${hhMM}`;
+}
+
+const isUpdateComputed = (createTime: string, updateTime: string) => {
+	return !dayjs(createTime, "YYYY-MM-DD HH:mm:ss").isSame(dayjs(updateTime, "YYYY-MM-DD HH:mm:ss"), 'day');
+}
+
+const imagesCountComputed = (images: any) => {
+	if (images == null) {
+		return 0;
+	}
+	if (images.length <= 3)
+		return 24 / images.length
+	return 24 / 3;
+}
+
+const toTags = (tags: string) => {
+	// 如果为null，直接返回空数组
+	if (tags == null) {
+		return []
+	}
+
+	// 如果字符串不包含逗号，直接返回字符串
+
+	if (!tags.includes(',')) {
+		return [tags]
+	}
+
+	return tags.split(',')
+}
+
+
 </script>
 <style scoped>
 .moment_info {

@@ -4,10 +4,18 @@ import { usePagination } from '@alova/scene-vue'
 
 export const saveOrUpdateMoments = () => {
 	const { data, send } = useRequest(
-		(moment: any) => alovaInstance.Post<MOMENTS>('/moments', moment),
+		(moment: any) => alovaInstance.Post<MOMENTS>('/moments', moment
+			,
+			{
+				headers: {
+					'Content-Type': 'application/json;charset=UTF-8'
+				},
+			}
+		),
 		{
 			immediate: false,
 		},
+
 	)
 	return { data, send }
 }
@@ -26,6 +34,16 @@ export const banMoments = () => {
 	const { send } = useRequest(
 		(id: number, status: number) =>
 			alovaInstance.Delete('/moments/ban?id=' + id + '&status=' + status),
+		{
+			immediate: false,
+		},
+	)
+	return { send }
+}
+
+export const deleteMoments = () => {
+	const { send } = useRequest(
+		(id: number) => alovaInstance.Delete('/moments?id=' + id),
 		{
 			immediate: false,
 		},

@@ -11,17 +11,5 @@ const { locale } = useI18n()
 		<span class="h-10 w-10 flex items-center justify-center">
 			<SwitchIcon unmount-persets />
 		</span>
-		<ul class="flex items-center gap-2 text-sm font-medium">
-			<li class="hidden !block">
-				<n-button
-					text
-					color="#8790a4"
-					size="small"
-					@click="locale = locale == '简体中文' ? 'English' : '简体中文'"
-				>
-					{{ locale == '简体中文' ? 'EN' : '简中' }}
-				</n-button>
-			</li>
-		</ul>
 	</nav>
 </template>

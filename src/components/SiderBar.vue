@@ -91,7 +91,7 @@
 			</template>
 			<n-space justify="space-around" size="large">
 				<n-button quaternary size="small" :focusable="false">
-					{{ $t('about') }}
+					关于
 				</n-button>
 				<n-button quaternary size="small" :focusable="false">
 					<switch-icon />
@@ -164,4 +164,3 @@ defineProps<{
 	}
 }
 </style>
-~/api/siteConfig~/api/siteSettings

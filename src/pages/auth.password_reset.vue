@@ -39,7 +39,8 @@ const options = computed(() => {
 {
     "meta": {
         "layout": "auth",
-        "name": "password_reset"
+        "name": "password_reset",
+        "title": "重置密码"
     }
 }
 </route>

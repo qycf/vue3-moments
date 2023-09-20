@@ -11,3 +11,13 @@ export const uploadImages = () => {
 
 	return { send }
 }
+
+export const uploadImagesByUrls = () => {
+	const { send } = useRequest(
+		(urls: string[]) => alovaInstance.Post('/images/upload?urls=' + urls,),
+		{
+			immediate: false,
+		},
+	)
+	return { send }
+}

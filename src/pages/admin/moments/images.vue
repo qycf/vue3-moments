@@ -44,9 +44,8 @@
 					<a-grid item-responsive class="mt-4" :col-gap="1" :row-gap="1"
 						:cols="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 4, xxl: 4 }">
 						<a-grid-item v-for="i in item.imagesList" :key="i.id">
-							<a-image :src='i.url' :title="i.createTime" description='Present by Arco Design'
-							width="300px" height="200px" fit="cover" 
-								style=" vertical-align: top;" :preview-visible="visible"
+							<a-image :src='i.url' :title="i.createTime" :description='(i.id as any)' width="300px"
+								height="200px" fit="cover" style=" vertical-align: top;" :preview-visible="visible"
 								@preview-visible-change="() => { visible = false }">
 								<template #extra>
 									<div class="actions">
@@ -58,7 +57,6 @@
 								</template>
 							</a-image>
 						</a-grid-item>
-
 					</a-grid>
 				</a-grid-item>
 			</a-image-preview-group>
@@ -70,7 +68,7 @@
 import { UploadCustomRequestOptions, UploadFileInfo, UploadInst } from 'naive-ui';
 import { isDark } from 'vue-dark-switch'
 import { AddLinkSharp, ArchiveSharp } from '@vicons/material'
-import { uploadImages } from '~/api/upload'
+import { uploadImages, uploadImagesByUrls } from '~/api/upload'
 import { imagesGroup } from '~/api/images'
 const showModal = ref(false)
 const previewImageUrl = ref('')
@@ -78,10 +76,15 @@ const images = ref([])
 const uploadRef = ref<UploadInst | null>(null)
 
 const { data: imagesGroupRsp } = imagesGroup()
-
+const { send: uploadUrls } = uploadImagesByUrls()
 
 const handleUpload = () => {
-	uploadRef.value?.submit()
+	console.log(images.value);
+	uploadUrls(images.value).then(res => {
+		console.log(res);
+	})
+
+	// uploadRef.value?.submit()
 }
 
 const { send } = uploadImages()
@@ -96,8 +99,6 @@ const Upload = ({ file,
 	onFinish,
 	onError,
 	onProgress }: UploadCustomRequestOptions) => {
-
-	console.log("filefilefilefile", file);
 
 	let files = new FormData()
 	files.append('files', file.file as File)

@@ -2,8 +2,8 @@
     <div class="w-[20rem]">
         <n-space vertical :size="24">
             <img src="/logo.png" alt="show your face" />
-            <n-input type="text" size="large" placeholder="邮箱"></n-input>
-            <n-button block size="large" color="#eb5735">
+            <n-input type="text" v-model:value="email" size="large" placeholder="邮箱"></n-input>
+            <n-button disabled block size="large" color="#eb5735" @click="clickRegister">
                 立即注册
             </n-button>
             <div class="text-center text-sm text-[#a6a6a6]">
@@ -19,16 +19,22 @@
 
 <script lang='ts' setup>
 import { ref, computed } from 'vue'
-const email = ref('')
-const options = computed(() => {
-    return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-        const prefix = email.value.split('@')[0]
-        return {
-            label: prefix + suffix,
-            value: prefix + suffix
-        }
-    })
+import { useNotification } from 'naive-ui'
+const notification = useNotification()
+
+
+notification.create({
+    title: "通知",
+    description: '注册功能暂未开放',
+    meta: '2023-09-11 15:11',
+    duration: 1500,
 })
+
+
+const email = ref('')
+const clickRegister = () => {
+
+}
 </script>
 <style scoped></style>
 
@@ -37,7 +43,8 @@ const options = computed(() => {
 {
     "meta": {
         "layout": "auth",
-        "name": "register"
+        "name": "register",
+        "title": "注册"
     }
 }
 </route>

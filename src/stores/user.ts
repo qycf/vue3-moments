@@ -1,15 +1,23 @@
 import { defineStore } from 'pinia'
+import { AUTH, USER } from '~/api/auth'
 
-export default defineStore('user', {
+export const useUserStore = defineStore('user', {
 	state() {
 		return {
-			isLogin: false,
-			showModalRef: false,
+			Authorization: '',
+			userInfo: {} as USER,
 		}
 	},
 	actions: {
-		setLogin() {
-			this.isLogin = true
+		setLogin(LoginRsp: AUTH) {
+			this.Authorization = LoginRsp.Authorization
+			this.userInfo = LoginRsp.userInfo
 		},
+		setLogout() {
+			this.Authorization = ''
+			this.userInfo = {} as USER
+			localStorage.removeItem('user')
+		}
 	},
+	persist: true,
 })

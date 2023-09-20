@@ -68,6 +68,8 @@ const tableLoading = ref(true)
 const rowKey = (dataTable: any) => dataTable.id
 const { data, send, page, pageSize, pageCount, loading, refresh } = momentsListRsp()
 const { send: banMomentsSend } = banMoments()
+const { send: deleteMomentsSend } = deleteMoments()
+
 onMounted(() => {
     send(page.value, pageSize.value)
 })
@@ -81,7 +83,6 @@ watch(page, (newVal, oldVal) => {
 
 const { locale, t } = useI18n()
 
-// const loading = ref(false)
 
 const clickSearch = () => {
     loading.value = true
@@ -147,12 +148,6 @@ const options = ref([
         value: 'song12',
     },
 ])
-
-const tagsType = {
-    humanity: 'success',
-    scenery: 'warning',
-    portrait: 'error',
-} as any
 
 const colums = ref([
     {
@@ -267,13 +262,13 @@ const colums = ref([
                         tertiary: true,
                         size: 'small',
                         onClick: () => {
-                            // deleteMomentsSend(row.id).then(res => {
-                            //     toast.success("删除成功")
-                            //     refresh()
-                            // })
+                            deleteMomentsSend(row.id).then(res => {
+                                toast.success("删除成功")
+                                refresh()
+                            })
                         },
                     },
-                    { default: () => t('ban') },
+                    { default: () => '删除' },
                 ),
             ]
         },
@@ -281,9 +276,8 @@ const colums = ref([
 ]) as any
 
 
-const play = (row: any) => {
-    console.log(row)
-}
+
+
 </script>
 <style scoped></style>
 

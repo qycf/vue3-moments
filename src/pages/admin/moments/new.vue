@@ -3,7 +3,7 @@
 		<n-grid :x-gap="12" :y-gap="12" :cols="12">
 			<n-gi span="9" class="p-3" :style="`background-color:${isDark ? `#171717` : `#fff`};border-radius:0.75rem`">
 				<n-form-item label-style="font-size:x-large;" path="age"
-					:label="$route.query.id ? t('edit') : t('new moments')">
+					:label="$route.query.id ? '编辑' : '新动态'">
 					<n-input v-model:value="momentsForm.title" />
 				</n-form-item>
 				<div style="border: 1px solid #ccc;">
@@ -16,11 +16,11 @@
 			<n-gi span="3">
 				<n-collapse :theme-overrides="collapseThemeOverrides" arrow-placement="right"
 					:default-expanded-names="['1', '2', '3']">
-					<n-collapse-item :title="t('Publish')" name="1" class="p-3"
+					<n-collapse-item title="发表" name="1" class="p-3"
 						:style="`background-color:${isDark ? `#171717` : `#fff`};border-radius:0.75rem`">
 						<n-space :size="6" vertical justify="space-around">
 							<n-space justify="space-between">
-								<span class="text-[#61677A] font-bold">{{ t('ban') }}</span>
+								<span class="text-[#61677A] font-bold">冻结</span>
 								<n-switch v-model:value="momentsForm.isBan" />
 							</n-space>
 							<n-space justify="space-between">
@@ -43,16 +43,8 @@
 					<n-collapse-item :title="t('images')" name="3" class="p-3"
 						:style="`background-color:${isDark ? `#171717` : `#fff`};border-radius:0.75rem`">
 						<n-space vertical>
-							<n-button type="primary" dashed block>
-								<template #icon>
-									<n-icon>
-										<AddAPhotoSharp />
-									</n-icon>
-								</template>
-								从图库选择
-							</n-button>
+							<n-input v-model:value="momentsForm.images" type="text" placeholder="图片id,逗号分隔" />
 						</n-space>
-
 
 					</n-collapse-item>
 				</n-collapse>
@@ -109,10 +101,7 @@ const momentsForm = ref({
 	start: 0,
 	createTime: null,
 	tags: [],
-	images: {
-		urls: [],
-		ids: []
-	}
+	images: ''
 })
 
 const clickPublish = () => {
@@ -125,8 +114,15 @@ const clickPublish = () => {
 		isTop: momentsForm.value.isTop ? 1 : 0,
 		start: momentsForm.value.start,
 		createTime: momentsForm.value.createTime === null ? null : timestampToTime(momentsForm.value.createTime),
-		tags: momentsForm.value.tags.length > 0 ? momentsForm.value.tags.join(',') : null
+		tags: momentsForm.value.tags.length > 0 ? momentsForm.value.tags.join(',') : null,
+		images: momentsForm.value.images
 	}
+
+	// 如果标题为空则不发送
+	if (momentsReq.title === '') {
+		return
+	}
+
 	saveOrUpdateMomentsSend(momentsReq).then(res => {
 		router.push('/admin/moments/new?id=' + res.id)
 	})
@@ -163,7 +159,8 @@ const renderTag = (tag: string, index: number) => {
 			type: 'success',
 			closable: true,
 			onClose: () => {
-				tags.value.splice(index, 1)
+
+				momentsForm.value.tags.splice(index, 1)
 			}
 		},
 		{
@@ -187,7 +184,7 @@ const timestampToTime = (timestamp: any) => {
 
 
 // 设置moments表单数据，用于页面展示
-const setMomentsForm = (moments: MOMENTS) => {
+const setMomentsForm = (moments:any) => {
 	momentsForm.value.id = moments.id as any
 	momentsForm.value.title = moments.title
 	momentsForm.value.content = moments.content
@@ -196,6 +193,7 @@ const setMomentsForm = (moments: MOMENTS) => {
 	momentsForm.value.isTop = moments.isTop === 0 ? false : true
 	momentsForm.value.createTime = moments.createTime ? new Date(moments.createTime).getTime() as any : null
 	momentsForm.value.tags = moments.tags !== null ? moments.tags.split(',') as any : []
+	momentsForm.value.images = moments.images
 }
 
 
@@ -206,7 +204,8 @@ const setMomentsForm = (moments: MOMENTS) => {
 {
 	"meta": {
 		"layout": "admin",
-		"name": "new moments"
+		"name": "new moments",
+		"title": "编辑动态"
 	}
 }
 </route>
