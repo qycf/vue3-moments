@@ -23,7 +23,7 @@
 						<div class="right">
 							<div class="name text-lg" style="color: #b7a34e">qiuyue2525</div>
 							<div class="date" :style="{ color: isDark ? '#8f918e' : '#a6a6a6' }">
-								{{ dateComputed(item.createTime) }}
+								{{ updateTimeComputed(item.createTime,item.updateTime) }}
 							</div>
 						</div>
 					</div>
@@ -107,8 +107,7 @@ const dateComputed = (dateTime: string) => {
 	if(now.year() !== date.year()){
 		return `${date.year()}-${month}-${dayOfMonth} ${hhMM}`;
 	}
-	console.log(now.date(), dayOfMonth);
-	
+
 	const today = now.date();
 	const difference = today - dayOfMonth
 	switch (difference) {
