@@ -23,7 +23,7 @@
 						<div class="right">
 							<div class="name text-lg" style="color: #b7a34e">qiuyue2525</div>
 							<div class="date" :style="{ color: isDark ? '#8f918e' : '#a6a6a6' }">
-								{{ updateTimeComputed(item.createTime, item.updateTime) }}
+								{{ dateComputed(item.createTime) }}
 							</div>
 						</div>
 					</div>
@@ -37,7 +37,7 @@
 				<!-- 动态内容 -->
 				<div class="mt-1">
 					<!-- 文本内容 -->
-					<div class="content" v-html="item.content"></div>
+					<div v-html="item.content" class="editor-content-view"></div>
 					<!-- 图片 -->
 					<n-grid class="mt-1" cols="24" :x-gap="2" item-responsive responsive="screen">
 						<n-grid-item :span="`${imagesCountComputed(item.images)} m:6`" v-for="i, index in   item.images  "
@@ -62,11 +62,11 @@
 <script lang="ts" setup>
 import { IconToTop } from '@arco-design/web-vue/es/icon'
 import { MOMENTS } from '@/api/moments'
+import '~/styles/view.css'
 import dayjs from 'dayjs'
 
-
 // 获取当前时间
-const now = dayjs().date()
+const now = dayjs()
 // 判断当前是否移动端
 const isMobile = useMediaQuery('(max-width: 768px)')
 
@@ -94,6 +94,8 @@ const updateTimeComputed = (createTime: string, updateTime: string) => {
 
 };
 
+
+
 const dateComputed = (dateTime: string) => {
 	const date = dayjs(dateTime, "YYYY-MM-DD HH:mm:ss");
 	const month = formatDate(date.month() + 1);
@@ -102,8 +104,13 @@ const dateComputed = (dateTime: string) => {
 	const minute = formatDate(date.minute());
 	const hhMM = `${hour}:${minute}`;
 
-	const difference = now - dayOfMonth
-
+	if(now.year() !== date.year()){
+		return `${date.year()}-${month}-${dayOfMonth} ${hhMM}`;
+	}
+	console.log(now.date(), dayOfMonth);
+	
+	const today = now.date();
+	const difference = today - dayOfMonth
 	switch (difference) {
 		case 0:
 			return `今天 ${hhMM}`;
@@ -118,7 +125,7 @@ const dateComputed = (dateTime: string) => {
 		return `${difference}天前 ${hhMM}`;
 	}
 
-	return `${date.year()}-${month}-${dayOfMonth} ${hhMM}`;
+	return `${month}-${dayOfMonth} ${hhMM}`;
 }
 
 const isUpdateComputed = (createTime: string, updateTime: string) => {
@@ -188,12 +195,12 @@ const toTags = (tags: string) => {
 	position: absolute;
 }
 
-.hover {
+/* .hover {
 	transition: all 0.5s ease;
 }
 
 .hover:hover {
 	transform: scale(1.02);
 	box-shadow: 0 0 5 px rgba(0, 0, 0, 0.2);
-}
+} */
 </style>

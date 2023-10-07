@@ -1,8 +1,8 @@
 import { createAlova } from 'alova'
 import GlobalFetch from 'alova/GlobalFetch'
 import VueHook from 'alova/vue'
-import { createDiscreteApi, useMessage } from 'naive-ui'
 import { useUserStore } from '~/stores/user'
+import { createDiscreteApi } from 'naive-ui'
 
 const { message } = createDiscreteApi(
 	['message'],

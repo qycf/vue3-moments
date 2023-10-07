@@ -1,9 +1,6 @@
 import { createGetRoutes, setupLayouts } from 'virtual:meta-layouts'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes as fileRoutes } from 'vue-router/auto/routes'
-import { useSiteSettingsStore } from '~/stores/siteSettings'
-
-
 declare module 'vue-router' {
 	// 在这里定义你的 meta 类型
 	// eslint-disable-next-line no-unused-vars
@@ -19,28 +16,23 @@ export const router = createRouter({
 })
 
 
-
 // 路由守卫
 router.beforeEach((to, from, next) => {
-	if (to.path.startsWith('/admin')) {
-		const user = localStorage.getItem('user')
+	const title = import.meta.env.VITE_APP_TITLE + ' | ' + import.meta.env.VITE_APP_DESC;
+	document.title = to.meta.title ? `${to.meta.title} - ${title}` : title;
+	const isAdminRoute = to.path.startsWith('/admin');
+
+	if (isAdminRoute) {
+		const user = localStorage.getItem('user');
 		if (user) {
-			next()
+			next();
 		} else {
-			next('/auth/login')
+			next('/auth/login');
 		}
+	} else {
+		next();
 	}
-	next()
-})
-
-// 进入路由以后
-
-router.afterEach((to, from) => {
-	let siteSettings = useSiteSettingsStore()
-	let title = siteSettings.siteSettings.title
-	document.title = to.meta.title as string ? to.meta.title as string + ' | ' + title : title
-})
-
+});
 
 
 export const getRoutes = createGetRoutes(router)

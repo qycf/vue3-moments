@@ -2,10 +2,10 @@
 	<div>
 		<n-grid :x-gap="12" :y-gap="12" :cols="12">
 			<n-gi span="9" class="p-3" :style="`background-color:${isDark ? `#171717` : `#fff`};border-radius:0.75rem`">
-				<n-form-item label-style="font-size:x-large;" path="age"
-					:label="$route.query.id ? '编辑' : '新动态'">
+				<n-form-item label-style="font-size:x-large;" path="age" :label="$route.query.id ? '编辑' : '新动态'">
 					<n-input v-model:value="momentsForm.title" />
 				</n-form-item>
+
 				<div style="border: 1px solid #ccc;">
 					<Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :default-config="toolbarConfig"
 						:mode="mode" />
@@ -89,8 +89,7 @@ const { send: momentsSend } = momentsRsp()
 
 
 
-// tags列表
-const tags = ref([] as any[])
+
 // moments表单数据，用于页面展示
 const momentsForm = ref({
 	id: null,
@@ -184,7 +183,7 @@ const timestampToTime = (timestamp: any) => {
 
 
 // 设置moments表单数据，用于页面展示
-const setMomentsForm = (moments:any) => {
+const setMomentsForm = (moments: any) => {
 	momentsForm.value.id = moments.id as any
 	momentsForm.value.title = moments.title
 	momentsForm.value.content = moments.content
