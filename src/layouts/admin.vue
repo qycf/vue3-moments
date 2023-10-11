@@ -113,7 +113,6 @@
 <script lang="ts" setup>
 import { h } from 'vue'
 import { NButton, NIcon } from 'naive-ui'
-import type { MenuOption } from 'naive-ui'
 import {
 	CameraSharp,
 	SettingsSharp,

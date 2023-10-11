@@ -18,7 +18,7 @@
 </template>
 
 <script lang='ts' setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { LoginRsp } from '~/api/auth'
 import { useMessage } from 'naive-ui'
 import { useUserStore } from '~/stores/user'
